@@ -1,5 +1,9 @@
 package main
 
-func main() {
+import (
+	"mini-zone-service/service"
+)
 
+func main() {
+	service.Run()
 }
