@@ -37,17 +37,17 @@ func parseParams() (
 		log.Fatal("env param ZONE_ADDRESS is empty")
 	}
 
-	home := os.Getenv("HOME_URL")
+	home := os.Getenv("HOME_PORT")
 	if len(home) == 0 {
 		log.Fatal("env param HOME_URL is empty")
 	}
 
-	zone1 := os.Getenv("ZONE1_URL")
+	zone1 := os.Getenv("ZONE1_PORT")
 	if len(zone1) == 0 {
 		log.Fatal("env param ZONE1_URL is empty")
 	}
 
-	zone2 := os.Getenv("ZONE2_URL")
+	zone2 := os.Getenv("ZONE2_PORT")
 	if len(zone2) == 0 {
 		log.Fatal("env param ZONE2_URL is empty")
 	}
