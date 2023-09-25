@@ -5,9 +5,10 @@ import (
 )
 
 type ZoneList struct {
-	Home  string
-	Zone1 string
-	Zone2 string
+	Address   string
+	HomePort  string
+	Zone1Port string
+	Zone2Port string
 }
 
 type Metadata struct {

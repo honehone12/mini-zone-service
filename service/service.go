@@ -5,17 +5,15 @@ import (
 	"os"
 
 	"mini-zone-service/server"
+	"mini-zone-service/server/context"
 
 	"github.com/joho/godotenv"
 )
 
 func parseParams() (
+	context.Metadata,
 	string,
-	string,
-	string,
-	string,
-	string,
-	string,
+	context.ZoneList,
 ) {
 	if err := godotenv.Load(); err != nil {
 		log.Fatal(err)
@@ -34,6 +32,11 @@ func parseParams() (
 		log.Fatal("env param SERVER_LISTEN_AT is empty")
 	}
 
+	addr := os.Getenv("ZONE_ADDRESS")
+	if len(addr) == 0 {
+		log.Fatal("env param ZONE_ADDRESS is empty")
+	}
+
 	home := os.Getenv("HOME_URL")
 	if len(home) == 0 {
 		log.Fatal("env param HOME_URL is empty")
@@ -49,7 +52,17 @@ func parseParams() (
 		log.Fatal("env param ZONE2_URL is empty")
 	}
 
-	return name, ver, at, home, zone1, zone2
+	return context.Metadata{
+			Name:    name,
+			Version: ver,
+		},
+		at,
+		context.ZoneList{
+			Address:   addr,
+			HomePort:  home,
+			Zone1Port: zone1,
+			Zone2Port: zone2,
+		}
 }
 
 func Run() {

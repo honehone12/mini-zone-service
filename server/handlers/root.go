@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	"mini-zone-service/context"
+	"mini-zone-service/server/context"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -13,7 +13,8 @@ type RootResponse struct {
 }
 
 type ZoneResponse struct {
-	Url string
+	Address string
+	Port    string
 }
 
 func Root(c echo.Context) error {
@@ -27,20 +28,23 @@ func Root(c echo.Context) error {
 func Home(c echo.Context) error {
 	ctx := c.(*context.Context)
 	return c.JSON(http.StatusOK, ZoneResponse{
-		Url: ctx.Home,
+		Address: ctx.Address,
+		Port:    ctx.HomePort,
 	})
 }
 
 func Zone1(c echo.Context) error {
 	ctx := c.(*context.Context)
 	return c.JSON(http.StatusOK, ZoneResponse{
-		Url: ctx.Zone1,
+		Address: ctx.Address,
+		Port:    ctx.Zone1Port,
 	})
 }
 
 func Zone2(c echo.Context) error {
 	ctx := c.(*context.Context)
 	return c.JSON(http.StatusOK, ZoneResponse{
-		Url: ctx.Zone2,
+		Address: ctx.Address,
+		Port:    ctx.Zone2Port,
 	})
 }

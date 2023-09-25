@@ -1,8 +1,8 @@
 package server
 
 import (
-	"mini-zone-service/context"
-	"mini-zone-service/handlers"
+	"mini-zone-service/server/context"
+	"mini-zone-service/server/handlers"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -10,27 +10,17 @@ import (
 )
 
 func Run(
-	name string,
-	version string,
+	metadata context.Metadata,
 	listenAt string,
-	home string,
-	zone1 string,
-	zone2 string,
+	zones context.ZoneList,
 ) {
 	e := echo.New()
 	e.Use(func(next echo.HandlerFunc) echo.HandlerFunc {
 		return func(c echo.Context) error {
 			ctx := &context.Context{
-				Context: c,
-				Metadata: context.Metadata{
-					Name:    name,
-					Version: version,
-				},
-				ZoneList: context.ZoneList{
-					Home:  home,
-					Zone1: zone1,
-					Zone2: zone2,
-				},
+				Context:  c,
+				Metadata: metadata,
+				ZoneList: zones,
 			}
 			return next(ctx)
 		}
